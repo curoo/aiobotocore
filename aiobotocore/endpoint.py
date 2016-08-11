@@ -154,6 +154,7 @@ class AioEndpoint(Endpoint):
 
     @asyncio.coroutine
     def _request(self, method, url, headers, data):
+        headers['Accept-Encoding'] = 'identity'
         headers_ = dict(
             (z[0], text_(z[1], encoding='utf-8')) for z in headers.items())
         request_coro = self._aio_session.request(method, url=url,
